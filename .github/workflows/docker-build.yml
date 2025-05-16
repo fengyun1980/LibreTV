@@ -11,7 +11,7 @@ jobs:
   build:
     name: Build LibreTV image
     runs-on: ubuntu-latest
-    if: (github.event.workflow_run.conclusion == 'success' && github.repository == 'fengyun1980/LibreTV') || (github.repository == 'bestZwei/libretv')
+    if: (github.event.workflow_run.conclusion == 'success' && github.repository == 'fengyun1980/libretv') || (github.repository == 'fengyun1980/libretv')
 
     steps:
       - name: Check out repository
@@ -20,7 +20,7 @@ jobs:
       - name: Set Docker image tag based on repository
         id: set-tag
         run: |
-          if [ "${{ github.repository }}" = "fengyun1980/LibreTV" ]; then
+          if [ "${{ github.repository }}" = "fengyun1980/libretv" ]; then
             echo "IMAGE_TAG=libretv:latest" >> $GITHUB_OUTPUT
           else
             echo "IMAGE_TAG=libretv-beta:latest" >> $GITHUB_OUTPUT
@@ -44,5 +44,5 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: "${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest"
+          tags: "${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ env.IMAGE_TAG }}"
           platforms: linux/amd64,linux/arm64/v8
