@@ -44,5 +44,5 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: "${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ env.IMAGE_TAG }}"
+          tags: "${{ vars.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest"
           platforms: linux/amd64,linux/arm64/v8
